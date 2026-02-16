@@ -16,11 +16,17 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import AppLogo from './AppLogo.vue';
+import program from '@/routes/program';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Program Management',
+        href: program.index().url,
         icon: LayoutGrid,
     },
 ];

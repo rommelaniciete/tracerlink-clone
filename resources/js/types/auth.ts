@@ -18,3 +18,8 @@ export type TwoFactorConfigContent = {
     description: string;
     buttonText: string;
 };
+
+export type Program = {
+    id: number;
+    name: string;
+}

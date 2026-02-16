@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
 use App\Models\Program;
+use Illuminate\Pagination\PaginationServiceProvider;
+use Inertia\Inertia;
 
 class ProgramController extends Controller
 {
@@ -13,7 +15,11 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        $programs=Program::latest()->paginate(10);
+
+        return Inertia::render('Program/Index', [
+            'programs' => $programs,
+        ]);
     }
 
     /**
@@ -29,7 +35,10 @@ class ProgramController extends Controller
      */
     public function store(StoreProgramRequest $request)
     {
-        //
+        Program::create($request->validated());
+
+
+        return redirect()->route('program.index');
     }
 
     /**
@@ -53,7 +62,9 @@ class ProgramController extends Controller
      */
     public function update(UpdateProgramRequest $request, Program $program)
     {
-        //
+        $program->update($request->validated());
+
+        return redirect()->route('program.index');
     }
 
     /**
@@ -61,6 +72,8 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
+
+        return redirect()->route('program.index');
     }
 }
